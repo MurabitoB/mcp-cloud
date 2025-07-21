@@ -1,2 +1,4 @@
-packages: 
-  - "apps/*"
+packages:
+  - 'apps/*'
+  - 'mcp-cloud-api'
+  - 'mcp-cloud-api-e2e'
