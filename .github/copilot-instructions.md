@@ -95,6 +95,6 @@ nx g @nx/nest:service api/src/app/services/my-service
 ## Port Configuration
 
 - **UI Development**: http://localhost:3000
-- **API Development**: http://localhost:3000/api
+- **API Development**: http://localhost:4200/api
 
 When suggesting code changes, always consider the Nx workspace structure and use the appropriate project paths and naming conventions.
