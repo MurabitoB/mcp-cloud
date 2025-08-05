@@ -1,0 +1,30 @@
+{
+  "id": "sample",
+  "name": "Sample Module",
+  "description": "This is a sample module for demonstration purposes.",
+  "version": "1.0.0",
+  "image": "nginx:latest",
+  "createdAt": "2023-10-01T00:00:00Z",
+  "updatedAt": "2023-10-01T00:00:00Z",
+  "k8sManifestOverwrite": {},
+  "form": {
+    "fields": [
+      {
+        "name": "token",
+        "type": "text",
+        "label": "Github Token",
+        "argType": "arg",
+        "required": true,
+        "defaultValue": ""
+      },
+      {
+        "name": "Github Host",
+        "type": "text",
+        "label": "Github Host",
+        "argType": "env",
+        "required": false,
+        "defaultValue": "github.com"
+      }
+    ]
+  }
+}
