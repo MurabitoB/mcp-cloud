@@ -78,7 +78,7 @@ export class TemplateFormResponseDto {
 export class TemplateResponseDto {
   @ApiProperty({
     description: 'Template unique identifier',
-    example: 'clxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+    example: '18823cdf-19ef-43a5-83d4-8bed208bf96d'
   })
   id!: string;
 
