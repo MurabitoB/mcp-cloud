@@ -17,10 +17,9 @@ mcp-cloud/
 │   │   │   └── modules/              # 業務模組 (DDD 分層)
 │   │   │       └── templates/        # 範本模組
 │   │   │           ├── templates.module.ts
-│   │   │           ├── controllers/
-│   │   │           │   └── templates.controller.ts
-│   │   │           └── services/
-│   │   │               └── templates.service.ts
+│   │   │           ├── temlates.dto.ts
+│   │   │           ├── templates.controller.ts
+│   │   │           └── templates.service.ts
 │   │   ├── jest.config.ts            # Jest 配置
 │   │   ├── tsconfig.json            # TypeScript 配置
 │   │   └── package.json             # 依賴管理
@@ -48,6 +47,12 @@ mcp-cloud/
 ├── jest.config.ts                # Jest 根配置
 └── eslint.config.mjs             # ESLint 根配置
 ```
+
+## Swagger Decorator Guide
+
+- If the DTO is already defined correctly, do not defined in the controller again.
+- Use `@ApiProperty()` to document properties of DTOs.
+-
 
 ## important-instruction-reminders
 

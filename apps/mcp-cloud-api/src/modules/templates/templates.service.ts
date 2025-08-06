@@ -3,13 +3,14 @@ import {
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
-import { PrismaService } from '../../../core/prisma/prisma.service';
+import { PrismaService } from '../../core/prisma/prisma.service';
 import {
   CreateTemplateDto,
   UpdateTemplateDto,
   TemplateQueryDto,
-} from '../dto/template.dto';
-import { Template, TemplateForm } from '../interfaces/template.interface';
+  TemplateResponseDto,
+  TemplateFormDto,
+} from './template.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -98,16 +99,16 @@ export class TemplatesService {
 
   private transformTemplate = (
     template: Prisma.TemplateGetPayload<object>
-  ): Template => {
+  ): TemplateResponseDto => {
     return {
       ...template,
       form: template.form
-        ? (template.form as unknown as TemplateForm)
+        ? (template.form as unknown as TemplateFormDto)
         : undefined,
     };
   };
 
-  async createTemplate(data: CreateTemplateDto): Promise<Template> {
+  async createTemplate(data: CreateTemplateDto): Promise<TemplateResponseDto> {
     try {
       // Validate form structure if provided
       if (data.form) {
@@ -136,7 +137,7 @@ export class TemplatesService {
     }
   }
 
-  async getTemplateById(id: string): Promise<Template> {
+  async getTemplateById(id: string): Promise<TemplateResponseDto> {
     const template = await this.prisma.template.findUnique({
       where: { id },
     });
@@ -148,7 +149,10 @@ export class TemplatesService {
     return this.transformTemplate(template);
   }
 
-  async updateTemplate(id: string, data: UpdateTemplateDto): Promise<Template> {
+  async updateTemplate(
+    id: string,
+    data: UpdateTemplateDto
+  ): Promise<TemplateResponseDto> {
     // Check if template exists
     await this.getTemplateById(id);
 
@@ -195,7 +199,10 @@ export class TemplatesService {
     return { message: 'Template deleted successfully' };
   }
 
-  async duplicateTemplate(id: string, newName?: string): Promise<Template> {
+  async duplicateTemplate(
+    id: string,
+    newName?: string
+  ): Promise<TemplateResponseDto> {
     const originalTemplate = await this.getTemplateById(id);
 
     const duplicateData: CreateTemplateDto = {
@@ -227,7 +234,7 @@ export class TemplatesService {
     });
   }
 
-  private validateTemplateForm(form: TemplateForm): void {
+  private validateTemplateForm(form: TemplateFormDto): void {
     if (!form || typeof form !== 'object') {
       throw new BadRequestException('Form must be an object');
     }
